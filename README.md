@@ -1,6 +1,7 @@
 CSVBOSS Nickname Manager
 
-A Chrome extension that bulk applies Steam nicknames from a CSV, built to work with the CSVBOSS Discord bot.
+A Chrome extension that bulk applies Steam nicknames from a CSV,built to work with the CSVBOSS Discord bot.
+---------------------------------------------------------
 What it does
 
 -Bulk apply nicknames from a CSV of Steam64 IDs and names
@@ -34,6 +35,8 @@ How to use:
 Note:
 
 Nicknames take around 1.5 seconds each to apply due to Steam rate limits. For 27 users that is roughly 40 seconds.
+
+The prefix is useful for electricians in large Rust clans, allowing them to be authorized on turrets, tool cupboards, and more.
 
 Discord bot:
 
