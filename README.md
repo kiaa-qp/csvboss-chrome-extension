@@ -1,10 +1,6 @@
-CSVBOSS Nickname Manager
+# CSVBOSS
 
-A Chrome extension that bulk applies Steam nicknames from a CSV,built to work with the CSVBOSS Discord bot.
----------------------------------------------------------
-# CSVBOSS — Discord Bot & Steam Nickname Manager
-
-A Discord bot paired with a Chrome extension designed for Rust clan management. Lets you collect and manage your members' Steam accounts directly through Discord, export them for use in-game, and bulk apply Steam nicknames without doing it manually one by one.
+A Discord bot and Chrome extension for managing Steam accounts in Rust clans. Collect your members' Steam IDs through Discord, export them as a CSV, and bulk apply Steam nicknames without doing it one by one.
 
 ---
 
@@ -13,80 +9,66 @@ A Discord bot paired with a Chrome extension designed for Rust clan management. 
 | Command | Description |
 |---|---|
 | `/setsteamcsv` | Link your Steam account to your Discord profile |
-| `/mysteam` | Check your own currently linked Steam account |
-| `/getcsv` | Export all linked members as a Steam64 ID CSV, filterable by role or server |
-| `/farmstats` | Pull VitalRust farm & combat stats for any member, filter by server and wipe |
-| `/stats` | See overall registration stats for your server |
-| `/notlinked` | List every member in a role who hasn't linked yet |
-| `/remindunlinked` | Automatically DM all unlinked members in a role to register |
-| `/lookupsteam` | Look up any member's linked Steam account and profile |
-| `/adminadd` | Manually add a Steam link on behalf of a member |
+| `/mysteam` | View your currently linked Steam account |
+| `/getcsv` | Export linked members as a Steam64 CSV, filterable by role or server |
+| `/farmstats` | Check VitalRust farm & combat stats for any member, by server and wipe |
+| `/stats` | See registration stats for your server |
+| `/notlinked` | List members in a role who haven't linked yet |
+| `/remindunlinked` | DM all unlinked members in a role to register |
+| `/lookupsteam` | Look up any member's linked Steam account |
+| `/adminadd` | Manually add a Steam link for a member |
 | `/adminremove` | Remove a member's linked Steam account |
 
 ---
 
 ## Chrome Extension
 
-- Paste the CSV from `/getcsv` directly into the panel on your Steam friends page
-- Bulk apply Steam nicknames to all your members in one click
-- Add a clan tag prefix to every nickname — useful for turret and TC authorization in large clans
-- Strip all Steam nicknames at once when a wipe ends
-- Saves your last CSV between sessions so you don't have to paste it every time
+- Paste the CSV from `/getcsv` into the panel on your Steam friends page
+- Bulk apply Steam nicknames to all members in one click
+- Add a clan tag prefix to every nickname (useful for TC and turret auth)
+- Remove all Steam nicknames at once when a wipe ends
+- Saves your CSV between sessions
 
-### How to install
-
+**Install:**
 1. Download `extension.zip` and extract it
-2. Open Chrome and go to `chrome://extensions`
-3. Enable **Developer Mode** in the top right
-4. Click **Load unpacked** and select the extracted folder
-5. Go to `https://steamcommunity.com/my/friends` and the panel will appear
+2. Go to `chrome://extensions` and enable Developer Mode
+3. Click **Load unpacked** and select the folder
+4. Go to `https://steamcommunity.com/my/friends` — the panel will appear
 
-### How to use
+**Use:**
+1. Have members run `/setsteamcsv` in Discord
+2. Run `/getcsv` and copy the output
+3. Paste into the panel, add a prefix if needed, hit Apply
 
-1. Have your members run `/setsteamcsv` in your Discord server
-2. Run `/getcsv` to get the CSV output
-3. Paste it into the panel, add a prefix if needed, and click **Apply**
-
-> **Note:** Nicknames take around 1.5 seconds each to apply due to Steam rate limits. For 27 users that's roughly 40 seconds.
+Nicknames take ~1.5 seconds each due to Steam rate limits. 27 users takes around 40 seconds.
 
 ---
 
-## ⚙️ Setup
+## Setup
 
-### 1. Install dependencies
+**1. Install dependencies**
 ```bash
 npm install
 ```
 
-### 2. Create a Discord bot
+**2. Create a Discord bot**
 1. Go to [discord.com/developers/applications](https://discord.com/developers/applications)
-2. Create a new application → Bot tab → reset token to copy it
-3. Under **OAuth2 → URL Generator**, select:
-   - Scopes: `bot`, `applications.commands`
-   - Bot permissions: `Send Messages`, `Attach Files`, `Manage Members`
-4. Use the generated URL to invite the bot to your server
+2. Create an app, go to the Bot tab, and copy the token
+3. Under OAuth2 → URL Generator select scopes `bot` + `applications.commands` and invite it to your server
 
-### 3. Set environment variables
-
-Edit `restartbot.bat` with your values:
+**3. Configure restartbot.bat**
 ```bat
 set DISCORD_TOKEN=your_bot_token
-set CLIENT_ID=your_application_client_id
+set CLIENT_ID=your_client_id
 set DATABASE_URL=your_postgres_connection_string
 node bot.js
-```
-
-### 4. Run the bot
-```bat
-restartbot.bat
 ```
 
 ---
 
 ## Database
 
-Steam accounts are stored in a PostgreSQL database (tested with [Supabase](https://supabase.com)).  
-Run the following in your SQL editor to create the required table:
+Uses PostgreSQL (tested with [Supabase](https://supabase.com)). Run this once to set up the table:
 
 ```sql
 CREATE TABLE steam_data (
