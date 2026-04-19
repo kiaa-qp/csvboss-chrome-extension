@@ -2,42 +2,23 @@ CSVBOSS Nickname Manager
 
 A Chrome extension that bulk applies Steam nicknames from a CSV,built to work with the CSVBOSS Discord bot.
 ---------------------------------------------------------
-What it does
+A Discord bot paired with a Chrome extension designed for Rust clan management. Lets you collect and manage your members' Steam accounts directly through Discord, export them for use in-game, and bulk apply Steam nicknames without doing it manually one by one.
 
--Bulk apply nicknames from a CSV of Steam64 IDs and names
+Bot commands:
 
--Remove all your Steam nicknames at once
+/setsteamcsv — Link your Steam account to your Discord profile
+/getcsv — Export all linked members as a Steam64 ID CSV, filterable by role or server
+/farmstats — Pull VitalRust farm & combat stats for any member, filter by server and wipe
+/mysteam — Check your own currently linked Steam account
+/stats — See overall registration stats for your server
+/notlinked — List every member in a role who hasn't linked yet
+/remindunlinked — Automatically DM all unlinked members in a role to register
+/adminadd / /adminremove — Manually add or remove Steam links on behalf of members
+/lookupsteam — Look up any member's linked Steam account and profile
+Chrome extension:
 
--Optional prefix to tag everyone with a clan tag
-
--Saves your CSV between sessions
-
-How to install:
-
-1- Download extension.zip and extract it
-
-2- Open Chrome and go to chrome://extensions
-
-3- Enable Developer Mode in the top right
-
-4- Click Load unpacked and select the extension folder
-
-5- Go to https://steamcommunity.com/my/friends and the panel will appear
-
-How to use:
-
-1- Have your members run /setsteamcsv in your Discord server
-
-2- Run /getcsv to get the CSV output
-
-3- Paste it into the panel, add a prefix if needed, click Apply
-
-Note:
-
-Nicknames take around 1.5 seconds each to apply due to Steam rate limits. For 27 users that is roughly 40 seconds.
-
-The prefix is useful for electricians in large Rust clans, allowing them to be authorized on turrets, tool cupboards, and more.
-
-Discord bot:
-
-https://discord.com/oauth2/authorize?client_id=1489627661553893456&permissions=100352&integration_type=0&scope=bot+applications.commands
+Paste the CSV from /getcsv directly into the panel on your Steam friends page
+Bulk apply Steam nicknames to all your members in one click
+Add a clan tag prefix to every nickname — useful for turret and TC authorization in large clans
+Strip all Steam nicknames at once when a wipe ends
+Saves your last CSV between sessions so you don't have to paste it every time
