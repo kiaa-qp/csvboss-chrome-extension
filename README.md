@@ -1,46 +1,56 @@
-# CSVBOSS
+# CSVBOSS Chrome Extension
 
-A Discord bot and Chrome extension for managing Steam accounts in Rust clans. Collect your members' Steam IDs through Discord, export them as a CSV, and bulk apply Steam nicknames without doing it one by one.
-
----
-
-## Bot Commands
-
-| Command | Description |
-|---|---|
-| `/setsteamcsv` | Link your Steam account to your Discord profile |
-| `/mysteam` | View your currently linked Steam account |
-| `/getcsv` | Export linked members as a Steam64 CSV, filterable by role or server |
-| `/farmstats` | Check VitalRust farm & combat stats for any member, by server and wipe |
-| `/stats` | See registration stats for your server |
-| `/notlinked` | List members in a role who haven't linked yet |
-| `/remindunlinked` | DM all unlinked members in a role to register |
-| `/lookupsteam` | Look up any member's linked Steam account |
-| `/adminadd` | Manually add a Steam link for a member |
-| `/adminremove` | Remove a member's linked Steam account |
+A Chrome extension for bulk managing Steam nicknames and friends — built for Rust clan Electricians.
 
 ---
 
-## Chrome Extension
+## Features
 
-- Paste the CSV from `/getcsv` into the panel on your Steam friends page
-- Bulk apply Steam nicknames to all members in one click
-- Add a clan tag prefix to every nickname (useful for TC and turret auth)
-- Remove all Steam nicknames at once when a wipe ends
-- Saves your CSV between sessions
+**Nickname Manager**
+Paste a CSV of Steam IDs and names, optionally add a clan tag prefix, and apply all nicknames in one click. Progress bar and per-entry log included.
 
-**Install:**
-1. Download `extension.zip` and extract it
-2. Go to `chrome://extensions` and enable Developer Mode
-3. Click **Load unpacked** and select the folder
-4. Go to `https://steamcommunity.com/my/friends` — the panel will appear
+**Remove All Nicknames**
+Fetches your full friends list and clears every nickname at once — useful at the end of a wipe.
 
-**Use:**
-1. Have members run `/setsteamcsv` in Discord
-2. Run `/getcsv` and copy the output
-3. Paste into the panel, add a prefix if needed, hit Apply
+**Language Filter**
+Filter CSV entries by language column before applying. Supports `ru`, `en`, and `cn` — useful when you only want to nickname a specific region's players.
 
-Nicknames take ~1.5 seconds each due to Steam rate limits. 27 users takes around 40 seconds.
+**Friend Manager**
+Use the same CSV to send bulk friend requests or unfriend players in bulk.
 
 ---
 
+## CSV Format
+
+```
+steamid64,nickname
+76561198000000001,PlayerOne,en
+76561198000000002,PlayerTwo,ru
+76561198000000003,PlayerThree
+```
+
+- `steamid64` — 17-digit Steam ID (required)
+- `nickname` — the name to set (required)
+- `language` — `ru`, `en`, or `cn` (optional, used for language filter)
+
+---
+
+## Installation
+
+1. Go to the [Releases](https://github.com/kiaa-qp/csvboss-chrome-extension/releases) page and download the latest zip, or clone the repo
+2. Open Chrome and go to `chrome://extensions`
+3. Enable **Developer Mode** (toggle in the top right)
+4. Click **Load unpacked** and select the `extension` folder (unzip the zipped folder you downloaded first)
+5. Navigate to `https://steamcommunity.com/my/friends` — the panel will appear automatically
+
+> The extension only works on `steamcommunity.com/*/friends*` pages and requires you to be logged into Steam in the same browser.
+
+---
+
+## Notes
+
+- Nicknames are applied at ~1.5 seconds each due to Steam rate limits
+- Your CSV and prefix are saved between sessions automatically
+- The panel is draggable — click the header and drag it anywhere on the page
+- **Error code 8** — already friends or request already pending
+- **Error code 84** — their profile restricts incoming friend requests
